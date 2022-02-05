@@ -8,13 +8,15 @@ from voc import parse_voc_annotation
 from yolo import create_yolov3_model, dummy_loss
 from generator import BatchGenerator
 from utils.utils import normalize, evaluate, makedirs
-from keras.callbacks import EarlyStopping, ReduceLROnPlateau
-from keras.optimizers import Adam
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
+from tensorflow.keras.optimizers import Adam
 from callbacks import CustomModelCheckpoint, CustomTensorBoard
 from utils.multi_gpu_model import multi_gpu_model
 import tensorflow as tf
 import keras
-from keras.models import load_model
+
+
+from tensorflow.keras.models import load_model
 
 
 config = tf.compat.v1.ConfigProto(
@@ -46,7 +48,7 @@ def create_training_instances(
         train_valid_split = int(0.8*len(train_ints))
         np.random.seed(0)
         np.random.shuffle(train_ints)
-        np.random.seed()
+        np.random.seed(0)
 
         valid_ints = train_ints[train_valid_split:]
         train_ints = train_ints[:train_valid_split]

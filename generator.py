@@ -1,7 +1,7 @@
 import cv2
 import copy
 import numpy as np
-from keras.utils import Sequence
+from tensorflow.keras.utils import Sequence
 from utils.bbox import BoundBox, bbox_iou
 from utils.image import apply_random_scale_and_crop, random_distort_image, random_flip, correct_bounding_boxes
 
@@ -159,7 +159,7 @@ class BatchGenerator(Sequence):
         image_name = instance['filename']
         image = cv2.imread(image_name) # RGB image
         
-        if image is None: print('Cannot find ', image_name)
+        if image is None: print('Cannot find -------------', image_name,instance)
         image = image[:,:,::-1] # RGB image
             
         image_h, image_w, _ = image.shape

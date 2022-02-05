@@ -1,7 +1,9 @@
+from importlib.resources import path
 import numpy as np
 import os
 import xml.etree.ElementTree as ET
 import pickle
+import pathlib
 
 def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[]):
     if os.path.exists(cache_name):
@@ -13,7 +15,8 @@ def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[]):
         seen_labels = {}
         
         for ann in sorted(os.listdir(ann_dir)):
-            img = {'object':[]}
+            img = {'object':[],  'xml_name_only': pathlib.Path(ann).stem }
+
 
             try:
                 tree = ET.parse(ann_dir + ann)
@@ -24,7 +27,8 @@ def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[]):
             
             for elem in tree.iter():
                 if 'filename' in elem.tag:
-                    img['filename'] = img_dir + elem.text
+                    #img['filename'] = img_dir + elem.text
+                    img['filename'] = f"{img_dir}{pathlib.Path(ann).stem}.jpg"
                 if 'width' in elem.tag:
                     img['width'] = int(elem.text)
                 if 'height' in elem.tag:
