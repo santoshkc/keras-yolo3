@@ -7,12 +7,12 @@
     },
 
     "train": {
-        "train_image_folder":   "../../PolypsSet/PolypsSet/train2019/Image/",
-        "train_annot_folder":   "../../PolypsSet/PolypsSet/train2019/Annotation/",
+        "train_image_folder":   "../PolypsSet/train2019/Image/",
+        "train_annot_folder":   "../PolypsSet/train2019/Annotation/",
         "cache_name":           "polypset_train.pkl",
 
-        "train_times":          1,
-        "batch_size":           2,
+        "train_times":          5,
+        "batch_size":           16,
         "learning_rate":        1e-4,
         "nb_epochs":            100,
         "warmup_epochs":        3,
@@ -31,8 +31,8 @@
     },
 
     "valid": {
-        "valid_image_folder":   "../../PolypsSet/PolypsSet/val2019/Image/",
-        "valid_annot_folder":   "../../PolypsSet/PolypsSet/val2019/Annotation/",
+        "valid_image_folder":   "../PolypsSet/val2019/Image/",
+        "valid_annot_folder":   "../PolypsSet/val2019/Annotation/",
         "cache_name":           "polypset_val.pkl",
 
         "valid_times":          1
