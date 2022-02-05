@@ -24,7 +24,8 @@ def compute_dir(dir: str, extension: str , is_validation: bool):
         return [ str(x) for x in glob.glob(str(mod_path))]
 
 def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[], is_validation = False):
-    if  False:#os.path.exists(cache_name):
+
+    if  os.path.exists(cache_name):
         with open(cache_name, 'rb') as handle:
             cache = pickle.load(handle)
         all_insts, seen_labels = cache['all_insts'], cache['seen_labels']
@@ -32,8 +33,8 @@ def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[], is_validation 
         all_insts = []
         seen_labels = {}
 
-        samples = compute_dir(ann_dir, "xml", is_validation)[:3]
-        for item in samples:
+        samples = compute_dir(ann_dir, "xml", is_validation)
+        for item in samples[:3]:
             print(str(item),derive_image_path_from_annotation(str(item)))
         
         for annotation_xml_file in sorted(samples):
@@ -51,7 +52,9 @@ def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[], is_validation 
                 if 'filename' in elem.tag:
                     #img['filename'] = img_dir + elem.text
                     #img['filename'] = f"{img_dir}{pathlib.Path(ann).stem}.jpg"
-                    img['filename'] = derive_image_path_from_annotation(annotation_xml_file)
+                    x = derive_image_path_from_annotation(annotation_xml_file)
+                    #print(x,ann_dir)
+                    img['filename'] = x
                 if 'width' in elem.tag:
                     img['width'] = int(elem.text)
                 if 'height' in elem.tag:
