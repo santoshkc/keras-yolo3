@@ -41,8 +41,15 @@ def evaluate(model,
     all_detections     = [[None for i in range(generator.num_classes())] for j in range(generator.size())]
     all_annotations    = [[None for i in range(generator.num_classes())] for j in range(generator.size())]
 
+    ignored_indices = set()
+
     for i in range(generator.size()):
-        raw_image = [generator.load_image(i)]
+        raw_img = generator.load_image(i,dummy=True)
+        if raw_img is None:
+          ignored_indices.add(i)
+          continue
+        raw_image = [raw_img]
+
 
         # make the boxes and the labels
         pred_boxes = get_yolo_boxes(model, raw_image, net_h, net_w, generator.get_anchors(), obj_thresh, nms_thresh)[0]
@@ -80,6 +87,8 @@ def evaluate(model,
         num_annotations = 0.0
 
         for i in range(generator.size()):
+            if i in ignored_indices:
+              continue
             detections           = all_detections[i][label]
             annotations          = all_annotations[i][label]
             num_annotations     += annotations.shape[0]
