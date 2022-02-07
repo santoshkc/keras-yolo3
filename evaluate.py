@@ -25,7 +25,8 @@ def _main_(args):
         config['valid']['valid_annot_folder'], 
         config['valid']['valid_image_folder'], 
         config['valid']['cache_name'],
-        config['model']['labels']
+        config['model']['labels'],
+        True
     )
 
     labels = labels.keys() if len(config['model']['labels']) == 0 else config['model']['labels']
