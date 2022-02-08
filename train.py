@@ -160,7 +160,9 @@ def create_model(
     # load the pretrained weight if exists, otherwise load the backend weight only
     if os.path.exists(saved_weights_name): 
         print("\nLoading pretrained weights.\n")
-        template_model.load_weights(saved_weights_name)
+        # keras not loading the trained weight
+        # so using by_name=True to avoid training from scratch
+        template_model.load_weights(saved_weights_name,by_name=True)
     else:
         template_model.load_weights("backend.h5", by_name=True)       
 
