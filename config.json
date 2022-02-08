@@ -34,7 +34,7 @@
         "valid_image_folder":   "../PolypsSet/val2019/Image/",
         "valid_annot_folder":   "../PolypsSet/val2019/Annotation/",
         "cache_name":           "polypset_val.pkl",
-
+        "use_training_folder":  true,
         "valid_times":          1
     }
 }
