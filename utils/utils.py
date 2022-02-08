@@ -44,7 +44,7 @@ def evaluate(model,
     ignored_indices = set()
 
     for i in range(generator.size()):
-        raw_img = generator.load_image(i,dummy=True)
+        raw_img = generator.load_image(i)
         if raw_img is None:
           ignored_indices.add(i)
           continue
